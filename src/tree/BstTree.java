@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Tree {
+public class BstTree {
 
 	Node root = initialiseTree();
 
@@ -48,7 +48,7 @@ public class Tree {
 
 	}
 
-	public static Node getNode(Tree tree, int key) {
+	public static Node getNode(BstTree tree, int key) {
 		Node pointer = tree.root;
 		while (null != pointer) {
 			if (key == pointer.data)
@@ -61,7 +61,7 @@ public class Tree {
 		return null;
 	}
 
-	public static Node successor(Tree tree, int key) {
+	public static Node successor(BstTree tree, int key) {
 		Node currentNode = getNode(tree, key);
 		if (null != currentNode.right) {
 			return getMin(currentNode.right);
@@ -81,7 +81,7 @@ public class Tree {
 		return root;
 	}
 
-	private static void levelOrderTraversal(Tree tree) {
+	public static void levelOrderTraversal(BstTree tree) {
 		Queue<Node> queue = new LinkedList<>();
 		queue.offer(tree.root);
 		queue.offer(null);
@@ -104,10 +104,40 @@ public class Tree {
 		}
 	}
 
-	public static void main(String[] args) {
-		Tree tree = new Tree();
+	public void deleteNode(BstTree tree, int dataNode) {
+		Node targetNode = getNode(tree, dataNode);
+		if (null == targetNode.right && null == targetNode.left) {
+			if (targetNode.parent == targetNode.parent.left)
+				targetNode.parent.left = null;
+			else
+				targetNode.parent.right = null;
+		} else if (null == targetNode.left) {
+			targetNode.parent.right = targetNode.right;
+			targetNode.right.parent = targetNode.parent;
+		} else if (null == targetNode.right) {
+			targetNode.parent.left = targetNode.left;
+			targetNode.left.parent = targetNode.parent;
+		} else {
+			if (null != targetNode.right.left) {
+				Node sucessor = successor(tree, targetNode.data);
+				sucessor.left = targetNode.left;
+				targetNode.left.parent = sucessor;
 
-		Tree.inorder(tree.root);
+				sucessor.parent.left = sucessor.right;
+				if (null != sucessor.right)
+					sucessor.right.parent = sucessor.parent;
+
+				targetNode.parent.right = sucessor;
+				sucessor.parent = targetNode.parent;
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		BstTree tree = new BstTree();
+
+		BstTree.inorder(tree.root);
 		System.out.println("Succesor");
 		Node node = getNode(tree, 30);
 		// System.out.println(node.parent.data);
