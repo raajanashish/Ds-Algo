@@ -1,4 +1,4 @@
-package serialization;
+package com.raajan.serialization;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package linkedlist;
+package com.raajan.linkedlist;
 
 import java.util.HashSet;
 import java.util.Scanner;

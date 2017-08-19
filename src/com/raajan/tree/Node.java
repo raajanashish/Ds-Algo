@@ -1,4 +1,4 @@
-package tree;
+package com.raajan.tree;
 
 public class Node {
 	public Node left;

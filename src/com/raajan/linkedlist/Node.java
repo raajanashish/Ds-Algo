@@ -1,4 +1,4 @@
-package linkedlist;
+package com.raajan.linkedlist;
 
 import java.util.Comparator;
 

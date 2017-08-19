@@ -1,4 +1,4 @@
-package serialization;
+package com.raajan.serialization;
 
 public class SuperClass {
 	int a;

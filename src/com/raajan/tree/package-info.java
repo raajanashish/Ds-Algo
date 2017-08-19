@@ -1,6 +1,6 @@
-package tree;
+package com.raajan.tree;
 
-/*To Print all all ancestor of given node in binary tree
+/*To Print all all ancestor of given node in binary com.raajan.tree
 	@co getAllAncestor  -->>BstTree 
 */
 class Package{
@@ -8,7 +8,7 @@ class Package{
 	
 	/**
 	 * some javadoc stuff
-	 * {@link com.my.package.Class#method()}
+	 * {@link }
 	 * more stuff
 	 * @see com.my.package.AnotherClass
 	 */

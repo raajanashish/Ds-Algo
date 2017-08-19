@@ -1,7 +1,7 @@
 /**
  * 
  */
-package linkedlist;
+package com.raajan.linkedlist;
 
 /**
  * @author RaJaN

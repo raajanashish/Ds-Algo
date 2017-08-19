@@ -1,4 +1,4 @@
-package tree;
+package com.raajan.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -143,17 +143,17 @@ public class BstTree {
 		getAllAncestor(tree.root, getNode(tree, 14));
 
 		/*
-		 * BstTree.inorder(tree.root); System.out.println("Succesor"); Node node
-		 * = getNode(tree, 30); // System.out.println(node.parent.data);
-		 * System.out.println(successor(tree, 15).data);
+		 * BstTree.inorder(com.raajan.tree.root); System.out.println("Succesor"); Node node
+		 * = getNode(com.raajan.tree, 30); // System.out.println(node.parent.data);
+		 * System.out.println(successor(com.raajan.tree, 15).data);
 		 * System.out.println("Level Order Traversal");
-		 * levelOrderTraversal(tree);
+		 * levelOrderTraversal(com.raajan.tree);
 		 */
 	}
 
 	/**
-	 * It will print to get All Ancestor from given node in binary tree not
-	 * nessart a binary tree
+	 * It will print to get All Ancestor from given node in binary com.raajan.tree not
+	 * nessart a binary com.raajan.tree
 	 * 
 	 * @param root
 	 * @param targetNode

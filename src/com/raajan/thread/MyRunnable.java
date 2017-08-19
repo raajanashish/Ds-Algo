@@ -1,4 +1,4 @@
-package thread;
+package com.raajan.thread;
 
 public class MyRunnable implements Runnable {
 

@@ -1,10 +1,10 @@
-package tree.traversal;
+package com.raajan.tree.traversal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tree.BstTree;
-import tree.Node;
+import com.raajan.tree.BstTree;
+import com.raajan.tree.Node;
 
 /**
  * Inorder, Preorder, Postorder

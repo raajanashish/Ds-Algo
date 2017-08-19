@@ -2,7 +2,7 @@ package test;
 
 import java.util.LinkedList;
 
-import linkedlist.Node;
+import com.raajan.linkedlist.Node;
 
 public class Test extends Node {
 	{
