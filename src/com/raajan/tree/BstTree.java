@@ -140,7 +140,7 @@ public class BstTree {
 
 	public static void main(String[] args) {
 		BstTree tree = new BstTree();
-		getAllAncestor(tree.root, getNode(tree, 14));
+		getAllAncestors(tree.root, getNode(tree, 14));
 
 		/*
 		 * BstTree.inorder(com.raajan.tree.root); System.out.println("Succesor"); Node node
@@ -159,7 +159,7 @@ public class BstTree {
 	 * @param targetNode
 	 * @return
 	 */
-	public static boolean getAllAncestor(Node root, Node targetNode) {
+	public static boolean getAllAncestors(Node root, Node targetNode) {
 		if (null == root)
 			return false;
 		if (root.data == targetNode.data) {
@@ -167,11 +167,11 @@ public class BstTree {
 			return true;
 		}
 
-		if (getAllAncestor(root.left, targetNode)) {
+		if (getAllAncestors(root.left, targetNode)) {
 			System.out.println(root.data);
 			return true;
 		}
-		if (getAllAncestor(root.right, targetNode)) {
+		if (getAllAncestors(root.right, targetNode)) {
 			System.out.println(root.data);
 			return true;
 		}
