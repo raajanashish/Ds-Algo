@@ -2,11 +2,11 @@ package com.raajan.linkedlist;
 
 import java.util.Comparator;
 
-public class Node {
+public class ListNode {
 	public int data;
-	public Node next;
+	public ListNode next;
 
-	Node(int data, Node next){
+	ListNode(int data, ListNode next){
 		this.data= data;
 		this.next =next;
 	}
@@ -18,8 +18,8 @@ public class Node {
 		result = prime * result + ((next == null) ? 0 : next.hashCode());
 		return result;
 	}
-	public Node(){};
-	public Node(int data ){
+	public ListNode(){};
+	public ListNode(int data ){
 		this.data = data;
 		this.next= null;
 	}
@@ -30,7 +30,7 @@ public class Node {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Node other = (Node) obj;
+		ListNode other = (ListNode) obj;
 		if (data != other.data)
 			return false;
 		if (next == null) {
@@ -46,10 +46,10 @@ public class Node {
 	public void setData(int data) {
 		this.data = data;
 	}
-	public Node getNext() {
+	public ListNode getNext() {
 		return next;
 	}
-	public void setNext(Node next) {
+	public void setNext(ListNode next) {
 		this.next = next;
 	}
 	

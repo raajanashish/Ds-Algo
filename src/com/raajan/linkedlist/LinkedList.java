@@ -9,40 +9,41 @@ package com.raajan.linkedlist;
  */
 public class LinkedList {
 
-	/**
-	 * @param args
-	 */
-	
-	Node head;
-	Node tail;
-	int length;
+   /**
+    * @param args
+    */
 
-	public boolean add(int data){
-		Node  temp = new Node(data);
-		if(head == null)
-			{head=temp;
-			tail = temp;
-			}
-		else
-			{tail.next=temp;
-			tail=tail.next;
-			}
-		return false;
-	}
-	
-	public boolean add(int data, int position){
-		
-		return false;
-		
-	}
+   public ListNode head;
+   public ListNode tail;
+   public int length;
 
-	public boolean deleteByData(int data){
-		
-		return false;
-	}
+   public boolean add(int data) {
+      ListNode temp = new ListNode(data);
+      if (head == null) {
+         head = temp;
+         tail = temp;
+         length= 1;
+      } else {
+         tail.next = temp;
+         tail = tail.next;
+         length++;
+      }
+      return true;
+   }
 
-	public boolean deleteByPosition(int position){
-		return false;
-	}
+   public boolean add(int data, int position) {
+
+      return false;
+
+   }
+
+   public boolean deleteByData(int data) {
+
+      return false;
+   }
+
+   public boolean deleteByPosition(int position) {
+      return false;
+   }
 }
 

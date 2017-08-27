@@ -2,9 +2,9 @@ package test;
 
 import java.util.LinkedList;
 
-import com.raajan.linkedlist.Node;
+import com.raajan.linkedlist.ListNode;
 
-public class Test extends Node {
+public class Test extends ListNode {
 	{
 		System.out.println("non static block");
 		;
