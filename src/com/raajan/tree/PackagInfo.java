@@ -51,6 +51,12 @@ import com.raajan.tree.traversal.TreeTreversal;
  * {@link BstProblems#sortedLinkedListToBalencedBST(com.raajan.linkedlist.LinkedList)} <br>
  * 
  *
+ * To get ceiling of given node in binary search tree<br>
+ * {@link BstProblems#ceiling(Node, int)} <br>
+ * 
+ * *
+ * To get floor of given node in binary search tree<br>
+ * {@link BstProblems#floor(Node, int)} <br>
  * 
  * 
  * 

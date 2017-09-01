@@ -88,8 +88,12 @@ public class BstProblems {
          list.add(element);
       ListNode currentHead = list.head;
       inrder.clear();
+
       TreeTreversal.inorder(sortedLinkedListToBalencedBST(list), inrder);
       System.out.println(inrder);
+      System.out.println(floor(root, 26).data);
+      System.out.println(ceiling(root, 26).data);
+
       /*
        * Node newRoot = SortedArrayToBST(inrder.toArray(new Integer[inrder.size()]), 0,
        * inrder.size() - 1); inrder.clear(); TreeTreversal.inorder(newRoot, inrder);
@@ -172,6 +176,40 @@ public class BstProblems {
       }
       root.right = buildBalancedBST(mid + 1, end);
       return root;
+   }
+   private static int prev = Integer.MIN_VALUE;
+   public static Node floor(Node root, int key) {
+      if (null == root)
+         return null;
+
+      floor(root.left, key);
+
+      if (root.data == key)
+         return root;
+      else if (root.data > key)
+         return new Node(prev);
+
+      prev = root.data;
+
+      return floor(root.right, key);
+   }
+
+   private static int ceilPrev = Integer.MAX_VALUE;
+
+   public static Node ceiling(Node root, int key) {
+      if (null == root)
+         return null;
+
+      ceiling(root.right, key);
+
+      if (root.data == key)
+         return root;
+      else if (root.data < key)
+         return new Node(ceilPrev);
+
+      ceilPrev = root.data;
+
+      return ceiling(root.left, key);
    }
 
 }
