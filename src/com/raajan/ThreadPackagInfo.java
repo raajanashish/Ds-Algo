@@ -1,4 +1,6 @@
-package com.raajan.thread;
+package com.raajan;
+
+import com.raajan.thread.MyCallableFuture;
 
 /**
  * Demo for callable with future and without future
@@ -6,4 +8,4 @@ package com.raajan.thread;
  *{@link com.raajan.thread.MyCallableFuture#call()} 
  *
  */
-public class PackagInfo{}
+public class ThreadPackagInfo{}
