@@ -1,6 +1,5 @@
 package com.raajan.tree.traversal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.raajan.tree.BstTree;
@@ -27,20 +26,20 @@ public class TreeTreversal {
       if (inStart > inEnd || preStart > preEnd)
          return null;
 
-      Node currentNode = new Node(preOrder[preStart]);
-      int rootIndex = inStart;
-      while (rootIndex <= inEnd) {
-         if (currentNode.data == inorder[rootIndex])
+      Node root = new Node(preOrder[preStart]);
+      int inRootIndex = inStart;
+      while (inRootIndex <= inEnd) {
+         if (root.data == inorder[inRootIndex])
             break;
-         rootIndex++;
+         inRootIndex++;
       }
-      int leftSubTreeSize = rootIndex - inStart;
-      int rightSubTreSize = inEnd - rootIndex;
-      currentNode.left = buildTreeFromPreOrder(inorder, inStart, rootIndex - 1, preOrder,
+      int leftSubTreeSize = inRootIndex - inStart;
+      int rightSubTreSize = inEnd - inRootIndex;
+      root.left = buildTreeFromPreOrder(inorder, inStart, inRootIndex - 1, preOrder,
             preStart + 1, preStart + leftSubTreeSize);
-      currentNode.right = buildTreeFromPreOrder(inorder, rootIndex + 1, inEnd, preOrder,
+      root.right = buildTreeFromPreOrder(inorder, inRootIndex + 1, inEnd, preOrder,
             preEnd - rightSubTreSize + 1, preEnd);
-      return currentNode;
+      return root;
    }
 
    public static Node getBinaryTreeFromPostOrder(Integer[] inorder, Integer[] postorder) {

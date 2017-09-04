@@ -68,9 +68,43 @@ public class BstTree {
 
    public static Node successor(BstTree tree, int key) {
       Node currentNode = getNode(tree, key);
+      if (null != currentNode.left) {
+         return getMax(currentNode.left);
+      } else {
+         // node which is right child of its parent
+         Node parent = currentNode.parent;
+         while (null != parent.right && parent.right.data != currentNode.data) {
+            currentNode = parent;
+            parent = parent.parent;
+         }
+         return parent;
+      }
+   }
+
+   /**
+    * Will return successor of given node .. its assuming that that node is already present
+    * 
+    * @param root
+    * @param key
+    * @return
+    */
+   public static Node successorForBst(Node root, int key) {
+      if (null == root)
+         return null;
+      Node left = successorForBst(root.left, key);
+      if (null != left)
+         return left;
+      if (root.data > key)
+         return root;
+      return successorForBst(root.right, key);
+   }
+
+   public static Node predecessor(BstTree tree, int key) {
+      Node currentNode = getNode(tree, key);
       if (null != currentNode.right) {
          return getMin(currentNode.right);
       } else {
+         // node which is left child of its parent
          Node parent = currentNode.parent;
          while (null != parent.left && parent.left.data != currentNode.data) {
             currentNode = parent;
@@ -80,9 +114,15 @@ public class BstTree {
       }
    }
 
-   private static Node getMin(Node root) {
+   public static Node getMin(Node root) {
       while (null != root.left)
          root = root.left;
+      return root;
+   }
+
+   public static Node getMax(Node root) {
+      while (null != root.right)
+         root = root.right;
       return root;
    }
 
@@ -141,8 +181,8 @@ public class BstTree {
 
    public static void main(String[] args) {
       BstTree tree = new BstTree();
-      getAllAncestors(tree.root, getNode(tree, 14));
-
+      // getAllAncestors(tree.root, getNode(tree, 14));
+      System.out.println(successorForBst(tree.root, 31).data);
       /*
        * BstTree.inorder(com.raajan.tree.root); System.out.println("Succesor"); Node node =
        * getNode(com.raajan.tree, 30); System.out.println(node.parent.data);

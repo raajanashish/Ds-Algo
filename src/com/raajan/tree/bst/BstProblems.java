@@ -30,12 +30,12 @@ public class BstProblems {
          return false;
       PREV_NODE = root.data;
 
-
       return isBstInorder(root.right);
    }
 
    /**
-    * It will return least common ancestor in binary search tree for given node
+    * It will return least common ancestor in binary search tree for given node, Its based on
+    * preorder traversal
     * 
     * @param root
     * @param node1
@@ -44,15 +44,19 @@ public class BstProblems {
     */
    public static Node LCAForBSt(Node root, Node node1, Node node2) {
       if (null == root)
+         return null;
+
+      if (Math.max(node1.data, node2.data) > root.data
+            && Math.min(node1.data, node2.data) < root.data)
          return root;
 
-      if (Math.min(node1.data, node2.data) > root.data)
+      if (Math.max(node1.data, node2.data) < root.data)
          return LCAForBSt(root.left, node1, node2);
 
-      if (Math.max(node1.data, node2.data) > root.data)
+      if (Math.min(node1.data, node2.data) > root.data)
          return LCAForBSt(root.right, node1, node2);
 
-      return root;
+      return null; // never be called
    }
 
 
@@ -79,6 +83,7 @@ public class BstProblems {
 
    public static void main(String[] args) {
       Node root = new BstTree().initialiseTree();
+      System.out.println(LCAForBSt(root, new Node(27), new Node(32)).data);
       List<Integer> inrder = new ArrayList<>();
       TreeTreversal.inorder(root, inrder);
       System.out.println(inrder);
@@ -91,7 +96,7 @@ public class BstProblems {
 
       TreeTreversal.inorder(sortedLinkedListToBalencedBST(list), inrder);
       System.out.println(inrder);
-      System.out.println(floor(root, 26).data);
+      System.out.println(floor1(root, 11).data);
       System.out.println(ceiling(root, 26).data);
 
       /*
@@ -177,13 +182,32 @@ public class BstProblems {
       root.right = buildBalancedBST(mid + 1, end);
       return root;
    }
+
    private static int prev = Integer.MIN_VALUE;
+
    public static Node floor(Node root, int key) {
       if (null == root)
          return null;
 
       floor(root.left, key);
 
+      if (root.data == key)
+         return root;
+      else if (root.data > key)
+         return new Node(prev);
+
+      prev = root.data;
+
+      return floor(root.right, key);
+   }
+
+   public static Node floor1(Node root, int key) {
+      if (null == root)
+         return null;
+
+      Node left = floor(root.left, key);
+      if (null != left)
+         return left;
       if (root.data == key)
          return root;
       else if (root.data > key)
@@ -211,5 +235,4 @@ public class BstProblems {
 
       return ceiling(root.left, key);
    }
-
 }

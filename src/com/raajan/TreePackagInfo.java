@@ -67,9 +67,16 @@ import com.raajan.tree.traversal.TreeTreversal;
  * * To get floor of given node in binary search tree<br>
  * {@link BstProblems#floor(com.raajan.tree.Node, int)} <br>
  * 
+ * inorder , preorder, pot order <br>
+ * {@link TreeTreversal#postorder(Node, java.util.List)} <br>
+ * {@link TreeTreversal#inorder(Node, java.util.List)}<br>
+ * {@link TreeTreversal#preorder(Node, java.util.List)}<br>
  * 
+ * build binary tree from inorder and postorder, <br>
+ * {@link TreeTreversal#buildTreeFromPostOrder(Integer[], int, int, Integer[], int, int)}<br>
  * 
- * 
+ * build binary tree from inorder and preorder, <br>
+ * {@link TreeTreversal#buildTreeFromPreOrder(Integer[], int, int, Integer[], int, int)}<br>
  * 
  * 
  */
