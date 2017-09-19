@@ -36,31 +36,39 @@ public class DpProblems {
        */
 
 
-      int[] denomination = {500, 100, 50, 20, 10, 5, 2, 1};
+      /*int[] denomination = {500, 100, 50, 20, 10, 5, 2, 1};
       int value = 18;
       System.out.println(minCoin(denomination, denomination.length, value));
       table = new int[value + 1];
       for (int i = 0; i < table.length; i++)
          table[i] = Integer.MAX_VALUE;;
       System.out.println(minCoinDP(denomination, denomination.length, value));
-      System.out.println();
+      System.out.println();*/
+	  
+      int[] input = { 22, 9, 33, 21, 50, 41, 60, 70, 72, 1,2,3,};
+      lisTable = new int[input.length+1];
+      System.out.println(" Longest Common Sequence : "+longestIncreasingSequenceDP(input, input.length-1));
+      //System.out.println(lis(input, input.length));
    }
 
-   public static String lcsRecursion(String X, String Y) {
-      int xLength = X.length();
-      int yLength = Y.length();
+	public static String lcsRecursion(String X, String Y) {
+		int xLength = X.length();
+		int yLength = Y.length();
 
-      if (xLength == 0 || yLength == 0)
-         return "";
-      else if (X.charAt(xLength - 1) == Y.charAt(yLength - 1))
-         return lcsRecursion(X.substring(0, xLength - 1), Y.substring(0, yLength - 1))
-               + X.charAt(xLength - 1);
-      else {
-         String a = lcsRecursion(X.substring(0, xLength - 1), Y.substring(0, yLength));
-         String b = lcsRecursion(X.substring(0, xLength), Y.substring(0, yLength - 1));
-         return a.length() > b.length() ? a : b;
-      }
-   }
+		if (xLength == 0 || yLength == 0)
+			return "";
+		else if (X.charAt(xLength - 1) == Y.charAt(yLength - 1))
+			return lcsRecursion(X.substring(0, xLength - 1),
+					Y.substring(0, yLength - 1))
+					+ X.charAt(xLength - 1);
+		else {
+			String a = lcsRecursion(X.substring(0, xLength - 1),
+					Y.substring(0, yLength));
+			String b = lcsRecursion(X.substring(0, xLength),
+					Y.substring(0, yLength - 1));
+			return a.length() > b.length() ? a : b;
+		}
+	}
 
    /**
     * It will return longest common sequence from array of character
@@ -247,6 +255,116 @@ public class DpProblems {
       return table[V];
 
    }
+   
 
 
+   static int globalSeqSize=0;
+	public static int longestIncreasingSequenceRec(int[] input, int m) {
+		if (m == 0)
+			return 1;
+		int maxSeqUpToHere = 1/* Integer.MIN_VALUE */;
+
+		for (int i = 0; i < m; i++) {
+			int res = longestIncreasingSequenceRec(input, i);
+			/*if (input[i - 1] < input[m - 1] && res + 1 > maxSeqUpToHere) {
+				maxSeqUpToHere = res + 1;
+			}*/
+			if (input[i] < input[m ] && res + 1 > maxSeqUpToHere)
+				maxSeqUpToHere = Integer.max(res+1, maxSeqUpToHere);
+		}
+		globalSeqSize = Integer.max(maxSeqUpToHere, globalSeqSize);
+		return maxSeqUpToHere;
+	}
+
+	private static int[] lisTable ;
+
+	public static int longestIncreasingSequenceDP(int[] input, int m) {
+
+		for (int i = 1; i < input.length; i++)
+			lisTable[i] = 1;
+
+		for (int i = 0; i < input.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (input[j] < input[i] && lisTable[i] < lisTable[j] + 1)
+					lisTable[i] = lisTable[j] + 1;
+			}
+		}
+
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < m; i++)
+			if (max < lisTable[i])
+				max = lisTable[i];
+		printLIS(input);
+		return max;
+	}
+	
+	private static void printLIS(int[] input) {
+		int maxIndex = -1;
+		int max = -1;
+		for (int i = 0; i < lisTable.length; i++)
+			if (max < lisTable[i]) {
+				max = lisTable[i];
+				maxIndex = i;
+			}
+		max = input[maxIndex];
+		
+		for (int i = maxIndex; i >= 0; i--) {
+			if (input[i] <= max) {
+				System.out.print("  " + input[i]);
+				max = input[i];
+			}
+		}
+	}
+	/* To make use of recursive calls, this function must return
+	   two things:
+	   1) Length of LIS ending with element arr[n-1]. We use
+	      max_ending_here for this purpose
+	   2) Overall maximum as the LIS may end with an element
+	      before arr[n-1] max_ref is used this purpose.
+	   The value of LIS of full array of size n is stored in
+	   *max_ref which is our final result */
+	 static int max_ref=1;
+	static int _lis(int arr[], int n)
+	   {
+	       // base case
+	       if (n == 1)
+	           return 1;
+	 
+	       // 'max_ending_here' is length of LIS ending with arr[n-1]
+	       int res, max_ending_here = 1;
+	 
+	        /* Recursively get all LIS ending with arr[0], arr[1] ...
+	           arr[n-2]. If   arr[i-1] is smaller than arr[n-1], and
+	           max ending with arr[n-1] needs to be updated, then
+	           update it */
+	        for (int i = 1; i < n; i++)
+	        {
+	            res = _lis(arr, i);
+	            if (arr[i-1] < arr[n-1] && res + 1 > max_ending_here)
+	                max_ending_here = res + 1;
+	        }
+	 
+	        // Compare max_ending_here with the overall max. And
+	        // update the overall max if needed
+	        if (max_ref < max_ending_here)
+	           max_ref = max_ending_here;
+	 
+	        // Return length of LIS ending with arr[n-1]
+	        return max_ending_here;
+	   }
+	 
+	    // The wrapper function for _lis()
+	    static int lis(int arr[], int n)
+	    {
+	        // The max variable holds the result
+	         max_ref = 1;
+	 
+	        // The function _lis() stores its result in max
+	        _lis( arr, n);
+	 
+	        // returns max
+	        return max_ref;
+	    }
+	
+	
 }
