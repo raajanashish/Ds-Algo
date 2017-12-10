@@ -45,10 +45,15 @@ public class DpProblems {
       System.out.println(minCoinDP(denomination, denomination.length, value));
       System.out.println();*/
 	  
-      int[] input = { 22, 9, 33, 21, 50, 41, 60, 70, 72, 1,2,3,};
+      /*int[] input = { 22, 9, 33, 21, 50, 41, 60, 70, 72, 1,2,3,};
       lisTable = new int[input.length+1];
       System.out.println(" Longest Common Sequence : "+longestIncreasingSequenceDP(input, input.length-1));
       //System.out.println(lis(input, input.length));
+      */
+      int[] input = {1,2,3};
+      getCount(input, 5);
+      
+      System.out.println(count);
    }
 
 	public static String lcsRecursion(String X, String Y) {
@@ -366,5 +371,23 @@ public class DpProblems {
 	        return max_ref;
 	    }
 	
+	    private static int count =0;
+	    
+   public static  boolean getCount(int[] input, int N) {
+      if (N == 0)
+         return true;
+      if (N < 0)
+         return false;
+      for(int i =0; i<input.length ;i++){
+         if(getCount(input, N-1)){
+            count++; 
+            return true;
+         }
+         else 
+            return false;
+
+      }
+      return false;
+   }
 	
 }
