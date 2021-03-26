@@ -1,4 +1,4 @@
-package com.raajan.dp;
+package com.raajan.dp.knapsack;
 
 import java.util.Arrays;
 import java.util.Comparator;

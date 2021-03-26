@@ -1,15 +1,16 @@
-package com.raajan.dp;
+package com.raajan.dp.knapsack;
 
-public class Kanpsack01 {
+public class Kanpsack {
 
 
   public static void main(String[] args) {
-    int value[] = new int[] {100, 400, 300};
+    int value[] = new int[] {1000, 400, 300};
     int weight[] = new int[] {10, 20, 30};
     int wMax = 50;
     int n = value.length;
     System.out.println(knapsack(n, wMax, weight, value));
     System.out.println(knapsackDP(n, wMax, weight, value));
+    System.out.println(knapsackUnbounded(n, wMax, weight, value));
     System.out.println(knapsackUnboundedDp(n, wMax, weight, value));
 
   }
@@ -64,4 +65,19 @@ public class Kanpsack01 {
 
     return knapsack[n][wMax];
   }
+
+  public static int knapsackUnbounded(int n, int wMax, int[] weight, int[] value) {
+    if (wMax <= 0 || n <= 0) {
+      return 0;
+    }
+    int maxValue = Integer.MIN_VALUE;
+    for (int i = 1; i <= n; i++) {
+      maxValue =
+          Math.max(maxValue, knapsack(n, wMax - weight[i - 1], weight, value) + value[i - 1]);
+    }
+
+    return maxValue;
+
+  }
+
 }

@@ -1,4 +1,4 @@
-package com.raajan.dp;
+package com.raajan.dp.knapsack;
 
 public class SubsetSumProblem {
 
@@ -16,15 +16,14 @@ public class SubsetSumProblem {
 
   public static boolean isSubsetsum(int[] inputArray, int sum, int n) {
 
-    if ( n == 0) {
+    if (n == 0) {
       return false;
     } else if (sum == 0) {
       return true;
-    } 
-    if(inputArray[n-1]>sum)
-      {
-      return isSubsetsum(inputArray, sum, n-1);
-      }else {
+    }
+    if (inputArray[n - 1] > sum) {
+      return isSubsetsum(inputArray, sum, n - 1);
+    } else {
       return isSubsetsum(inputArray, sum, n - 1)
           || isSubsetsum(inputArray, sum - inputArray[n - 1], n - 1);
     }
@@ -38,13 +37,17 @@ public class SubsetSumProblem {
     for (int i = 0; i <= n; i++)
       subset[i][0] = true;
 
+    // sub set sum from empty input array
+    for (int s = 1; s < sum; s++) {
+      subset[0][s] = false;
+    }
 
     for (int i = 1; i <= n; i++) {
-      for (int s = 0; s <= sum; s++) {
-        if (s > inputArray[i - 1]) {
-          subset[i][s] = subset[i - 1][s] || subset[i-1][s - inputArray[i - 1]];
+      for (int s = 1; s <= sum; s++) {
+        if (s >= inputArray[i - 1]) {
+          subset[i][s] = subset[i - 1][s] || subset[i - 1][s - inputArray[i - 1]];
         } else {
-          subset[i][s] = subset[i-1][s];
+          subset[i][s] = subset[i - 1][s];
         }
       }
     }
