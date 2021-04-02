@@ -13,26 +13,37 @@ public class LongestCommonSubString {
   public static void main(String[] args) {
     String X = "OldSite:GeeksforGeeks.org";
     String Y = "NewSite:GeeksQuiz.com";
-    //String X = "abcdxyz";
-    //String Y = "xyzabcd";
-    // System.out.println(lcSubStringRec(X, Y, X.length(), Y.length(), ""));
+    // String X = "abcdxyz";
+    // String Y = "xyzabcd";
+    System.out.println(lcSubStringRec(X, Y, X.length(), Y.length(), 0));
 
     System.out.println(lcSubStringDp(X, Y));
   }
 
 
-
-  public static String lcSubStringRec(String X, String Y, int m, int n, String lcs) {
+  /**
+   * Not executing properly, needs to fixed.
+   * 
+   * @param X
+   * @param Y
+   * @param m
+   * @param n
+   * @param count
+   * @return
+   */
+  public static int lcSubStringRec(String X, String Y, int m, int n, int count) {
     if (m == 0 || n == 0) {
-      return "";
-    } else if (X.charAt(X.length() - 1) == Y.charAt(Y.length() - 1)) {
-      return lcSubStringRec(X, Y, m - 1, n - 1, X.charAt(m - 1) + lcs);
-    } else {
-      String xLcs = lcSubStringRec(X, Y, m - 1, n, "");
-      String yLcs = lcSubStringRec(X, Y, m, n - 1, "");
-      return xLcs.length() >= yLcs.length() ? xLcs : yLcs;
+      return count;
     }
+    if (X.charAt(m - 1) == Y.charAt(n - 1)) {
+      count = lcSubStringRec(X, Y, m - 1, n - 1, X.charAt(m - 1) + count);
+    }
+    int xLcs = lcSubStringRec(X, Y, m - 1, n, 0);
+    int yLcs = lcSubStringRec(X, Y, m, n - 1, 0);
+    count = Math.max(count, Math.max(xLcs, yLcs));
+    return count;
   }
+
 
 
   public static int lcSubStringDp(String X, String Y) {
