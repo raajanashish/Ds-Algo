@@ -1,4 +1,4 @@
-package com.raajan.dp;
+package com.raajan.dp.mcm;
 
 public class MinMaxValueOfExepression {
 
