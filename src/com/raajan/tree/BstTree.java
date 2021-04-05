@@ -14,7 +14,7 @@ public class BstTree {
 
    Node root = initialiseTree();
 
-   public Node initialiseTree() {
+   public static Node initialiseTree() {
       Node root = new Node();
       int[] treeArray = new int[] {25, 12, 15, 13, 30, 28, 32, 27, 33, 14};
       root.data = 25;
@@ -217,4 +217,7 @@ public class BstTree {
       }
       return false;
    }
+   
+   
+   
 }
