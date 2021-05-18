@@ -1,9 +1,10 @@
-package com.raajan.tree;
+package com.raajan.tree.traversal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.raajan.tree.traversal.TreeTreversal;
+import com.raajan.tree.BinaryTree;
+import com.raajan.tree.Node;
 
 /**
  * A tree can be folded if left and right subtrees of the tree are structure
