@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.raajan.tree.BinaryTree;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * A tree can be folded if left and right subtrees of the tree are structure
@@ -33,7 +33,7 @@ public class IsStructurallySame {
 	public static void main(String[] args) {
 		// int[] treeArray = new int[] {25, 12, 15, 13, 30, 28, 29};
 		int[] treeArray = new int[] { 25, 12, 15, 13, 35, 28, 29, 30, 14 };
-		Node root = BinaryTree.initialiseTree(treeArray);
+		TreeNode root = BinaryTree.initialiseTree(treeArray);
 
 		List<Integer> inorder = new ArrayList<Integer>();
 		System.out.println(isFoldable(root));
@@ -44,7 +44,7 @@ public class IsStructurallySame {
 		System.out.println(inorder.toString());// which should in decreasing order
 	}
 
-	public static boolean isFoldable(Node root) {
+	public static boolean isFoldable(TreeNode root) {
 		if (root == null) {
 			return true;
 		}
@@ -70,7 +70,7 @@ public class IsStructurallySame {
 	 * @param b
 	 * @return
 	 */
-	public static boolean isStructSame(Node a, Node b) {
+	public static boolean isStructSame(TreeNode a, TreeNode b) {
 		if (a == null && b == null) {
 			return true;
 		}
@@ -86,7 +86,7 @@ public class IsStructurallySame {
 	 * 
 	 * @param root
 	 */
-	public static void mirror(Node root) {
+	public static void mirror(TreeNode root) {
 
 		if (root == null) {
 			return;
@@ -95,7 +95,7 @@ public class IsStructurallySame {
 		mirror(root.left);
 		mirror(root.right);
 
-		Node temp;
+		TreeNode temp;
 		temp = root.left;
 		root.left = root.right;
 		root.right = temp;

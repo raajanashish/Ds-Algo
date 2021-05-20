@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.raajan.dp.CatalanNumber;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * 
@@ -44,7 +44,7 @@ public class AllBinaryTreesFromInorder {
 
 	public static void main(String[] args) {
 		int[] inorder = { 4, 5, 7 };
-		List<Node> trees = getAllTheTrees(inorder, 0, inorder.length - 1);
+		List<TreeNode> trees = getAllTheTrees(inorder, 0, inorder.length - 1);
 
 		for (int i = 0; i < trees.size(); i++) {
 			System.out.println();
@@ -59,9 +59,9 @@ public class AllBinaryTreesFromInorder {
 	// Function for constructing all possible trees with given inorder traversal
 	// stored in an array from arr[start] to arr[end]. This function return list of
 	// trees.
-	public static List<Node> getAllTheTrees(int[] inorder, int inStart, int inEnd) {
+	public static List<TreeNode> getAllTheTrees(int[] inorder, int inStart, int inEnd) {
 		// List to store all possible trees
-		List<Node> trees = new ArrayList<Node>();
+		List<TreeNode> trees = new ArrayList<TreeNode>();
 
 		/*
 		 * if start > end then subtree will be empty so returning NULL in the list
@@ -77,9 +77,9 @@ public class AllBinaryTreesFromInorder {
 		 */
 		for (int i = inStart; i <= inEnd; i++) {
 			/* Constructing left subtree */
-			List<Node> leftTress = getAllTheTrees(inorder, inStart, i - 1);
+			List<TreeNode> leftTress = getAllTheTrees(inorder, inStart, i - 1);
 			/* Constructing right subtree */
-			List<Node> rightTrees = getAllTheTrees(inorder, i + 1, inEnd);
+			List<TreeNode> rightTrees = getAllTheTrees(inorder, i + 1, inEnd);
 
 			/*
 			 * Now looping through all left and right subtrees and connecting them to ith
@@ -89,7 +89,7 @@ public class AllBinaryTreesFromInorder {
 				for (int r = 0; r < rightTrees.size(); r++) {
 
 					// Making arr[i] as root
-					Node root = new Node(inorder[i]);
+					TreeNode root = new TreeNode(inorder[i]);
 
 					// Connecting left subtree
 					root.left = leftTress.get(l);

@@ -6,7 +6,7 @@ import java.util.List;
 import com.raajan.linkedlist.LinkedList;
 import com.raajan.linkedlist.ListNode;
 import com.raajan.tree.BstTree;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 import com.raajan.tree.traversal.TreeTreversal;
 
 public class BstProblems {
@@ -18,7 +18,7 @@ public class BstProblems {
     * @param root
     * @return
     */
-   public boolean isBstInorder(Node root) {
+   public boolean isBstInorder(TreeNode root) {
 
       if (null == root)
          return true;
@@ -26,9 +26,9 @@ public class BstProblems {
       if (!isBstInorder(root.left))
          return false;
 
-      if (PREV_NODE > root.data)
+      if (PREV_NODE > root.val)
          return false;
-      PREV_NODE = root.data;
+      PREV_NODE = root.val;
 
       return isBstInorder(root.right);
    }
@@ -42,18 +42,18 @@ public class BstProblems {
     * @param node2
     * @return
     */
-   public static Node LCAForBSt(Node root, Node node1, Node node2) {
+   public static TreeNode LCAForBSt(TreeNode root, TreeNode node1, TreeNode node2) {
       if (null == root)
          return null;
 
-      if (Math.max(node1.data, node2.data) > root.data
-            && Math.min(node1.data, node2.data) < root.data)
+      if (Math.max(node1.val, node2.val) > root.val
+            && Math.min(node1.val, node2.val) < root.val)
          return root;
 
-      if (Math.max(node1.data, node2.data) < root.data)
+      if (Math.max(node1.val, node2.val) < root.val)
          return LCAForBSt(root.left, node1, node2);
 
-      if (Math.min(node1.data, node2.data) > root.data)
+      if (Math.min(node1.val, node2.val) > root.val)
          return LCAForBSt(root.right, node1, node2);
 
       return null; // never be called
@@ -68,22 +68,22 @@ public class BstProblems {
     * @param end
     */
 
-   public static Node SortedArrayToBST(Integer[] sortedArrray, int start, int end) {
+   public static TreeNode SortedArrayToBST(Integer[] sortedArrray, int start, int end) {
       if (start > end)
          return null;
 
       int mid = start + (end - start) / 2;
-      Node root = new Node(sortedArrray[mid]);
-      Node left = SortedArrayToBST(sortedArrray, start, mid - 1);
-      Node right = SortedArrayToBST(sortedArrray, mid + 1, end);
+      TreeNode root = new TreeNode(sortedArrray[mid]);
+      TreeNode left = SortedArrayToBST(sortedArrray, start, mid - 1);
+      TreeNode right = SortedArrayToBST(sortedArrray, mid + 1, end);
       root.left = left;
       root.right = right;
       return root;
    }
 
    public static void main(String[] args) {
-      Node root = new BstTree().initialiseTree();
-      System.out.println(LCAForBSt(root, new Node(27), new Node(32)).data);
+      TreeNode root = new BstTree().initialiseTree();
+      System.out.println(LCAForBSt(root, new TreeNode(27), new TreeNode(32)).val);
       List<Integer> inrder = new ArrayList<>();
       TreeTreversal.inorder(root, inrder);
       System.out.println(inrder);
@@ -96,8 +96,8 @@ public class BstProblems {
 
       TreeTreversal.inorder(sortedLinkedListToBalencedBST(list), inrder);
       System.out.println(inrder);
-      System.out.println(floor1(root, 11).data);
-      System.out.println(ceiling(root, 26).data);
+      System.out.println(floor1(root, 11).val);
+      System.out.println(ceiling(root, 26).val);
 
       /*
        * Node newRoot = SortedArrayToBST(inrder.toArray(new Integer[inrder.size()]), 0,
@@ -112,11 +112,11 @@ public class BstProblems {
    /**
     * Will return kth smallest element in binary search tree, using global variable to track count
     */
-   public static Node kthSmallestElementInBst(Node root, int kth) {
+   public static TreeNode kthSmallestElementInBst(TreeNode root, int kth) {
       if (null == root)
          return null;
 
-      Node left = kthSmallestElementInBst(root.left, kth);
+      TreeNode left = kthSmallestElementInBst(root.left, kth);
       if (null != left)
          return left;
       count++;
@@ -128,11 +128,11 @@ public class BstProblems {
    /**
     * Will return kth largest element in binary search tree, using global variable to track count
     */
-   public static Node kthLargestElementInBst(Node root, int kth) {
+   public static TreeNode kthLargestElementInBst(TreeNode root, int kth) {
       if (null == root)
          return null;
 
-      Node right = kthLargestElementInBst(root.right, kth);
+      TreeNode right = kthLargestElementInBst(root.right, kth);
       if (null != right)
          return right;
       count++;
@@ -149,7 +149,7 @@ public class BstProblems {
     * @param list
     * @return
     */
-   public static Node sortedLinkedListToBalencedBST(LinkedList list) {
+   public static TreeNode sortedLinkedListToBalencedBST(LinkedList list) {
       ListNode currentNode = list.head;
       int length = 0;
       while (null != currentNode) {
@@ -169,12 +169,12 @@ public class BstProblems {
     * @param end
     * @return
     */
-   private static Node buildBalancedBST(int start, int end) {
+   private static TreeNode buildBalancedBST(int start, int end) {
       if (start > end)
          return null;
       int mid = start + (end - start) / 2;
-      Node left = buildBalancedBST(start, mid - 1);
-      Node root = new Node(currenntHead.data);
+      TreeNode left = buildBalancedBST(start, mid - 1);
+      TreeNode root = new TreeNode(currenntHead.data);
       root.left = left;
       if (null != currenntHead.next) {
          currenntHead = currenntHead.next;
@@ -185,53 +185,53 @@ public class BstProblems {
 
    private static int prev = Integer.MIN_VALUE;
 
-   public static Node floor(Node root, int key) {
+   public static TreeNode floor(TreeNode root, int key) {
       if (null == root)
          return null;
 
       floor(root.left, key);
 
-      if (root.data == key)
+      if (root.val == key)
          return root;
-      else if (root.data > key)
-         return new Node(prev);
+      else if (root.val > key)
+         return new TreeNode(prev);
 
-      prev = root.data;
+      prev = root.val;
 
       return floor(root.right, key);
    }
 
-   public static Node floor1(Node root, int key) {
+   public static TreeNode floor1(TreeNode root, int key) {
       if (null == root)
          return null;
 
-      Node left = floor(root.left, key);
+      TreeNode left = floor(root.left, key);
       if (null != left)
          return left;
-      if (root.data == key)
+      if (root.val == key)
          return root;
-      else if (root.data > key)
-         return new Node(prev);
+      else if (root.val > key)
+         return new TreeNode(prev);
 
-      prev = root.data;
+      prev = root.val;
 
       return floor(root.right, key);
    }
 
    private static int ceilPrev = Integer.MAX_VALUE;
 
-   public static Node ceiling(Node root, int key) {
+   public static TreeNode ceiling(TreeNode root, int key) {
       if (null == root)
          return null;
 
       ceiling(root.right, key);
 
-      if (root.data == key)
+      if (root.val == key)
          return root;
-      else if (root.data < key)
-         return new Node(ceilPrev);
+      else if (root.val < key)
+         return new TreeNode(ceilPrev);
 
-      ceilPrev = root.data;
+      ceilPrev = root.val;
 
       return ceiling(root.left, key);
    }

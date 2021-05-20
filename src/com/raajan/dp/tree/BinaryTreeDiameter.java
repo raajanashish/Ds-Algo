@@ -1,7 +1,7 @@
 package com.raajan.dp.tree;
 
 import com.raajan.tree.BinaryTree;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * The diameter of a tree (sometimes called the width) is the number of nodes on the longest path
@@ -16,7 +16,7 @@ public class BinaryTreeDiameter {
   public static void main(String[] args) {
     //int[] treeArray = new int[] {15, 12, 25, 30, 28, 32, 27, 33, 26, 34, 35, 36, 24, 23};
     int[] treeArray = new int[] {25,10,12,45,40,35,32,31,50,51,52,52};
-    Node root = BinaryTree.initialiseTree(treeArray);
+    TreeNode root = BinaryTree.initialiseTree(treeArray);
     diameter(root);
     System.out.println(diameter(root));
     //System.out.println(finalDia);
@@ -24,7 +24,7 @@ public class BinaryTreeDiameter {
 
   }
 
-  public static int diameter(Node root) {
+  public static int diameter(TreeNode root) {
     // Base condition
     if (root == null) {
       return 0;

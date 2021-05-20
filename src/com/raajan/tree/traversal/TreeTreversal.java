@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 import com.raajan.tree.BstTree;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * Inorder, Preorder, Postorder Build Tree using Inorder and Preorder Build Tree
@@ -18,7 +18,7 @@ import com.raajan.tree.Node;
 public class TreeTreversal {
 
 	public static void main(String[] args) {
-		Node root = new BstTree().initialiseTree();
+		TreeNode root = new BstTree().initialiseTree();
 
 		/*
 		 * List<Integer> inrder = new ArrayList<>(); inorder(root, inrder);
@@ -39,41 +39,41 @@ public class TreeTreversal {
 
 	}
 
-	public static void inorder(Node root, List<Integer> inorder) {
+	public static void inorder(TreeNode root, List<Integer> inorder) {
 		if (null == root)
 			return;
 		inorder(root.left, inorder);
-		System.out.print("  " + root.data);
-		inorder.add(root.data);
+		System.out.print("  " + root.val);
+		inorder.add(root.val);
 		inorder(root.right, inorder);
 
 	}
 
-	public static void preorder(Node root, List<Integer> preorder) {
+	public static void preorder(TreeNode root, List<Integer> preorder) {
 		if (null == root)
 			return;
-		System.out.print("  " + root.data);
-		preorder.add(root.data);
+		System.out.print("  " + root.val);
+		preorder.add(root.val);
 		preorder(root.left, preorder);
 		preorder(root.right, preorder);
 
 	}
 
-	public static void postorder(Node root, List<Integer> postorder) {
+	public static void postorder(TreeNode root, List<Integer> postorder) {
 		if (null == root)
 			return;
 		inorder(root.left, postorder);
 		inorder(root.right, postorder);
-		postorder.add(root.data);
+		postorder.add(root.val);
 	}
 
-	public static void inorderWithoutRec(Node root) {
+	public static void inorderWithoutRec(TreeNode root) {
 		if (root == null) {
 			return;
 		}
 
-		Stack<Node> st = new Stack<Node>();
-		Node current = root;
+		Stack<TreeNode> st = new Stack<TreeNode>();
+		TreeNode current = root;
 		// traverse the tree
 		while (current != null || !st.isEmpty()) {
 			/*
@@ -89,7 +89,7 @@ public class TreeTreversal {
 			}
 			/* Current must be NULL at this point */
 			current = st.pop();
-			System.out.print("  " + current.data);
+			System.out.print("  " + current.val);
 			/*
 			 * we have visited the node and its left subtree. Now, it's right subtree's turn
 			 */
@@ -98,13 +98,13 @@ public class TreeTreversal {
 
 	}
 
-	public static Node leaseCommonAncestor(Node root, int data1, int data2) {
-		Node leftLca, rightLca = null;
+	public static TreeNode leaseCommonAncestor(TreeNode root, int data1, int data2) {
+		TreeNode leftLca, rightLca = null;
 
 		if (root == null)
 			return null;
 		// if any of node matches then return because no need to travel beyond
-		if (data1 == root.data || data2 == root.data)
+		if (data1 == root.val || data2 == root.val)
 			return root;
 
 		leftLca = leaseCommonAncestor(root.left, data1, data2);
@@ -116,16 +116,16 @@ public class TreeTreversal {
 		return null != leftLca ? leftLca : rightLca;
 	}
 
-	public static void levelOrder(Node root) {
+	public static void levelOrder(TreeNode root) {
 		if (root == null) {
 			return;
 		}
-		Queue<Node> queue = new LinkedList<Node>();
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		queue.offer(root);
 
 		while (!queue.isEmpty()) {
-			Node currentNode = queue.poll();
-			System.out.print("  " + currentNode.data);
+			TreeNode currentNode = queue.poll();
+			System.out.print("  " + currentNode.val);
 			if (currentNode.left != null) {
 				queue.add(currentNode.left);
 			}
@@ -136,7 +136,7 @@ public class TreeTreversal {
 		}
 	}
 
-	public static void levelOrderWithoutQueue(Node root) {
+	public static void levelOrderWithoutQueue(TreeNode root) {
 		if (root == null)
 			return;
 		int height = height(root);
@@ -146,20 +146,20 @@ public class TreeTreversal {
 		}
 	}
 
-	public static void printLevelAtHeight(Node root, int level) {
+	public static void printLevelAtHeight(TreeNode root, int level) {
 		if (root == null) {
 			return;
 		}
 
 		if (level == 1) {
-			System.out.print("  " + root.data);
+			System.out.print("  " + root.val);
 		} else {
 			printLevelAtHeight(root.left, level - 1);
 			printLevelAtHeight(root.right, level - 1);
 		}
 	}
 
-	private static int height(Node root) {
+	private static int height(TreeNode root) {
 
 		if (root == null) {
 			return 0;

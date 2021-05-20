@@ -1,6 +1,6 @@
 package com.raajan.tree.checking;
 
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * From this we can learn how to travel across boundry of tree.
@@ -12,47 +12,47 @@ public class CheckCoverednUncoveredSum {
 
 	}
 
-	Node root;
+	TreeNode root;
 
 	/* Utility function to calculate sum of all node of tree */
-	int sum(Node t) {
+	int sum(TreeNode t) {
 		if (t == null)
 			return 0;
-		return t.data + sum(t.left) + sum(t.right);
+		return t.val + sum(t.left) + sum(t.right);
 	}
 
 	/*
 	 * Recursive function to calculate sum of left boundary elements
 	 */
-	int uncoveredSumLeft(Node t) {
+	int uncoveredSumLeft(TreeNode t) {
 		/* If left node, then just return its data value */
 		if (t.left == null && t.right == null)
-			return t.data;
+			return t.val;
 
 		/* If left is available then go left otherwise go right */
 		if (t.left != null)
-			return t.data + uncoveredSumLeft(t.left);
+			return t.val + uncoveredSumLeft(t.left);
 		else
-			return t.data + uncoveredSumLeft(t.right);
+			return t.val + uncoveredSumLeft(t.right);
 	}
 
 	/*
 	 * Recursive function to calculate sum of right boundary elements
 	 */
-	int uncoveredSumRight(Node t) {
+	int uncoveredSumRight(TreeNode t) {
 		/* If left node, then just return its data value */
 		if (t.left == null && t.right == null)
-			return t.data;
+			return t.val;
 
 		/* If right is available then go right otherwise go left */
 		if (t.right != null)
-			return t.data + uncoveredSumRight(t.right);
+			return t.val + uncoveredSumRight(t.right);
 		else
-			return t.data + uncoveredSumRight(t.left);
+			return t.val + uncoveredSumRight(t.left);
 	}
 
 	// Returns sum of uncovered elements
-	int uncoverSum(Node t) {
+	int uncoverSum(TreeNode t) {
 		/*
 		 * Initializing with 0 in case we don't have left or right boundary
 		 */
@@ -66,12 +66,12 @@ public class CheckCoverednUncoveredSum {
 		/*
 		 * returning sum of root node, left boundary and right boundary
 		 */
-		return t.data + lb + rb;
+		return t.val + lb + rb;
 	}
 
 	// Returns true if sum of covered and uncovered elements
 	// is same.
-	boolean isSumSame(Node root) {
+	boolean isSumSame(TreeNode root) {
 		// Sum of uncovered elements
 		int sumUC = uncoverSum(root);
 

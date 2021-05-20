@@ -1,7 +1,7 @@
 package com.raajan.tree.traversal;
 
 import com.raajan.tree.BinaryTree;
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * This will give the inorder successor of binary tree.
@@ -56,20 +56,20 @@ public class InorderSuccessor {
 
 	public static void main(String[] args) {
 		int[] treeArray = { 4, 2, 1, 3, 5, 6 };
-		Node root = BinaryTree.initialiseTree(treeArray);
-		Node x = new Node(3);
+		TreeNode root = BinaryTree.initialiseTree(treeArray);
+		TreeNode x = new TreeNode(3);
 		inorderSuccessor(root, x);
 	}
 
-	public static Node inorderSuccessor(Node root, Node x) {
+	public static TreeNode inorderSuccessor(TreeNode root, TreeNode x) {
 
 		if (x.right != null) {
 			return leftMostNode(root.right);
 		} else if (x.right == null) {
-			Node rightMostNode = rightMostNode(root);
+			TreeNode rightMostNode = rightMostNode(root);
 
 			// case3: If x is the right most node
-			if (rightMostNode.data == x.data) {
+			if (rightMostNode.val == x.val) {
 				System.out.print("No inorder successor! Right most node.\n");
 				return null;
 			} else {
@@ -82,7 +82,7 @@ public class InorderSuccessor {
 	}
 
 	// function to find left most node in a tree
-	public static Node leftMostNode(Node root) {
+	public static TreeNode leftMostNode(TreeNode root) {
 
 		while (root != null && root.left != null) {
 			return root = root.left;
@@ -91,26 +91,26 @@ public class InorderSuccessor {
 	}
 
 	// function to find right most node in a tree
-	static Node rightMostNode(Node node) {
+	static TreeNode rightMostNode(TreeNode node) {
 		while (node != null && node.right != null)
 			node = node.right;
 		return node;
 	}
 
-	private static Node temp;
+	private static TreeNode temp;
 
 	// recursive function to find the Inorder Scuccessor
 	// when the right child of node x is null
-	static Node findInorderRecursive(Node root, Node x) {
+	static TreeNode findInorderRecursive(TreeNode root, TreeNode x) {
 		if (root == null) {
 			return null;
 		}
-		if (root.data == x.data || (temp = findInorderRecursive(root.left, x)) != null
+		if (root.val == x.val || (temp = findInorderRecursive(root.left, x)) != null
 				|| (temp = findInorderRecursive(root.right, x)) != null) {
 			if (temp != null) {
-				if (root.left.data == temp.data) {
-					System.out.print("Inorder Successor of " + x.data);
-					System.out.print(" is " + root.data + "\n");
+				if (root.left.val == temp.val) {
+					System.out.print("Inorder Successor of " + x.val);
+					System.out.print(" is " + root.val + "\n");
 					// This is the required parent, inorder successor of x
 					return null;
 				}

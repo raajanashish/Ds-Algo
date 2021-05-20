@@ -7,7 +7,7 @@ package com.raajan.tree;
  *
  */
 public class BinaryTree {
-  public Node root;
+  public TreeNode root;
 
 
   /**
@@ -16,19 +16,19 @@ public class BinaryTree {
    * @param treeArray
    * @return
    */
-  public static Node initialiseTree(int[] treeArray) {
-    Node root = new Node();
+  public static TreeNode initialiseTree(int[] treeArray) {
+    TreeNode root = new TreeNode();
     if (treeArray == null) {
       treeArray = new int[] {25, 12, 15, 13, 30, 28, 32, 27, 33, 14};
     }
 
-    root.data = treeArray[0];
-    Node pointer = root;
+    root.val = treeArray[0];
+    TreeNode pointer = root;
     for (int i = 1; i < treeArray.length; i++) {
-      Node node = new Node(treeArray[i]);
+      TreeNode node = new TreeNode(treeArray[i]);
       pointer = root;
       while (null != pointer) {
-        if (node.data > pointer.data) {
+        if (node.val > pointer.val) {
           if (null == pointer.right) {
             pointer.right = node;
             node.parent = pointer;

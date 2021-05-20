@@ -46,21 +46,21 @@ public class ExpressionTree {
 
 	public static void main(String[] args) {
 		char[] charArray = { '6', '5', '+', '3', '2', '*', '4', '*', '-' };
-		Node root = constructExpressionTree(charArray);
+		TreeNode root = constructExpressionTree(charArray);
 		System.out.println(evaluateExep(root));
 		
 	}
 
-	public static Node constructExpressionTree(char[] postfixExpression) {
-		Stack<Node> st = new Stack<Node>();
-		Node r, left, right;
+	public static TreeNode constructExpressionTree(char[] postfixExpression) {
+		Stack<TreeNode> st = new Stack<TreeNode>();
+		TreeNode r, left, right;
 
 		for (int i = 0; i < postfixExpression.length; i++) {
 			if (!isOperator(postfixExpression[i])) {
-				r = new Node(postfixExpression[i]);
+				r = new TreeNode(postfixExpression[i]);
 				st.push(r);
 			} else {
-				r = new Node(postfixExpression[i]);
+				r = new TreeNode(postfixExpression[i]);
 
 				right = st.pop();
 				left = st.pop();
@@ -84,19 +84,19 @@ public class ExpressionTree {
 		return false;
 	}
 
-	public static int evaluateExep(Node root) {
+	public static int evaluateExep(TreeNode root) {
 
 		if (root == null) {
 			return 0;
 		}
 
-		if (!isOperator(root.charData)) {
-			return Character.getNumericValue(root.charData);
+		if (!isOperator(root.charVal)) {
+			return Character.getNumericValue(root.charVal);
 		} else {
 			int leftResult = evaluateExep(root.left);
 			int rightResult = evaluateExep(root.right);
 
-			char operator = root.charData;
+			char operator = root.charVal;
 
 			if ('+' == operator) {
 				return leftResult + rightResult;

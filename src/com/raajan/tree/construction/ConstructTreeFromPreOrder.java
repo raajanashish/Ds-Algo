@@ -1,6 +1,6 @@
 package com.raajan.tree.construction;
 
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * One can build directly print the postorder of the same tree or build the tree
@@ -18,21 +18,21 @@ public class ConstructTreeFromPreOrder {
 
 	}
 
-	public static Node getBinaryTreeFromPreOrder(Integer[] inorder, Integer[] preorder) {
+	public static TreeNode getBinaryTreeFromPreOrder(Integer[] inorder, Integer[] preorder) {
 		return buildTreeFromPreOrder(inorder, 0, inorder.length - 1, preorder, 0, preorder.length - 1);
 
 	}
 
-	public static Node buildTreeFromPreOrder(Integer[] inorder, int inStart, int inEnd, Integer[] preOrder,
+	public static TreeNode buildTreeFromPreOrder(Integer[] inorder, int inStart, int inEnd, Integer[] preOrder,
 			int preStart, int preEnd) {
 
 		if (inStart > inEnd || preStart > preEnd)
 			return null;
 
-		Node root = new Node(preOrder[preStart]);
+		TreeNode root = new TreeNode(preOrder[preStart]);
 		int inRootIndex = inStart;
 		while (inRootIndex <= inEnd) {
-			if (root.data == inorder[inRootIndex])
+			if (root.val == inorder[inRootIndex])
 				break;
 			inRootIndex++;
 		}
@@ -62,10 +62,10 @@ public class ConstructTreeFromPreOrder {
 		if (inStart > inEnd || preStart > preEnd)
 			return;
 
-		Node root = new Node(preOrder[preStart]);
+		TreeNode root = new TreeNode(preOrder[preStart]);
 		int inRootIndex = inStart;
 		while (inRootIndex <= inEnd) {
-			if (root.data == inorder[inRootIndex])
+			if (root.val == inorder[inRootIndex])
 				break;
 			inRootIndex++;
 		}
@@ -74,25 +74,25 @@ public class ConstructTreeFromPreOrder {
 		printPostOrderFromPreOrder(inorder, inStart, inRootIndex - 1, preOrder, preStart + 1,
 				preStart + leftSubTreeSize);
 		printPostOrderFromPreOrder(inorder, inRootIndex + 1, inEnd, preOrder, preEnd - rightSubTreSize + 1, preEnd);
-		System.out.print("  " + root.data);
+		System.out.print("  " + root.val);
 		;
 	}
 
-	public static Node getBinaryTreeFromPostOrder(Integer[] inorder, Integer[] postorder) {
+	public static TreeNode getBinaryTreeFromPostOrder(Integer[] inorder, Integer[] postorder) {
 		return buildTreeFromPostOrder(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
 
 	}
 
-	public static Node buildTreeFromPostOrder(Integer[] inorder, int inStart, int inEnd, Integer[] postOrder,
+	public static TreeNode buildTreeFromPostOrder(Integer[] inorder, int inStart, int inEnd, Integer[] postOrder,
 			int postStart, int postEnd) {
 
 		if (inStart > inEnd || postStart > postEnd)
 			return null;
 
-		Node currentNode = new Node(postOrder[postEnd]);
+		TreeNode currentNode = new TreeNode(postOrder[postEnd]);
 		int rootIndex = inStart;
 		while (rootIndex <= inEnd) {
-			if (currentNode.data == inorder[rootIndex])
+			if (currentNode.val == inorder[rootIndex])
 				break;
 			rootIndex++;
 		}

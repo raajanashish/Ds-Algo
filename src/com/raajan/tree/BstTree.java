@@ -12,19 +12,19 @@ import java.util.Queue;
  */
 public class BstTree {
 
-   Node root = initialiseTree();
+   TreeNode root = initialiseTree();
 
-   public static Node initialiseTree() {
-      Node root = new Node();
+   public static TreeNode initialiseTree() {
+      TreeNode root = new TreeNode();
       int[] treeArray = new int[] {25, 12, 15, 13, 30, 28, 32, 27, 33, 14};
-      root.data = 25;
-      Node pointer = root;
+      root.val = 25;
+      TreeNode pointer = root;
       for (int i = 1; i < treeArray.length; i++) {
-         Node node = new Node();
-         node.data = treeArray[i];
+         TreeNode node = new TreeNode();
+         node.val = treeArray[i];
          pointer = root;
          while (null != pointer) {
-            if (node.data > pointer.data) {
+            if (node.val > pointer.val) {
                if (null == pointer.right) {
                   pointer.right = node;
                   node.parent = pointer;
@@ -44,21 +44,21 @@ public class BstTree {
       return root;
    }
 
-   public static void inorder(Node root) {
+   public static void inorder(TreeNode root) {
       if (null == root)
          return;
       inorder(root.left);
-      System.out.println(root.data);
+      System.out.println(root.val);
       inorder(root.right);
 
    }
 
-   public static Node getNode(BstTree tree, int key) {
-      Node pointer = tree.root;
+   public static TreeNode getNode(BstTree tree, int key) {
+      TreeNode pointer = tree.root;
       while (null != pointer) {
-         if (key == pointer.data)
+         if (key == pointer.val)
             return pointer;
-         else if (key > pointer.data) {
+         else if (key > pointer.val) {
             pointer = pointer.right;
          } else
             pointer = pointer.left;
@@ -66,14 +66,14 @@ public class BstTree {
       return null;
    }
 
-   public static Node successor(BstTree tree, int key) {
-      Node currentNode = getNode(tree, key);
+   public static TreeNode successor(BstTree tree, int key) {
+      TreeNode currentNode = getNode(tree, key);
       if (null != currentNode.left) {
          return getMax(currentNode.left);
       } else {
          // node which is right child of its parent
-         Node parent = currentNode.parent;
-         while (null != parent.right && parent.right.data != currentNode.data) {
+         TreeNode parent = currentNode.parent;
+         while (null != parent.right && parent.right.val != currentNode.val) {
             currentNode = parent;
             parent = parent.parent;
          }
@@ -88,25 +88,25 @@ public class BstTree {
     * @param key
     * @return
     */
-   public static Node successorForBst(Node root, int key) {
+   public static TreeNode successorForBst(TreeNode root, int key) {
       if (null == root)
          return null;
-      Node left = successorForBst(root.left, key);
+      TreeNode left = successorForBst(root.left, key);
       if (null != left)
          return left;
-      if (root.data > key)
+      if (root.val > key)
          return root;
       return successorForBst(root.right, key);
    }
 
-   public static Node predecessor(BstTree tree, int key) {
-      Node currentNode = getNode(tree, key);
+   public static TreeNode predecessor(BstTree tree, int key) {
+      TreeNode currentNode = getNode(tree, key);
       if (null != currentNode.right) {
          return getMin(currentNode.right);
       } else {
          // node which is left child of its parent
-         Node parent = currentNode.parent;
-         while (null != parent.left && parent.left.data != currentNode.data) {
+         TreeNode parent = currentNode.parent;
+         while (null != parent.left && parent.left.val != currentNode.val) {
             currentNode = parent;
             parent = parent.parent;
          }
@@ -114,27 +114,27 @@ public class BstTree {
       }
    }
 
-   public static Node getMin(Node root) {
+   public static TreeNode getMin(TreeNode root) {
       while (null != root.left)
          root = root.left;
       return root;
    }
 
-   public static Node getMax(Node root) {
+   public static TreeNode getMax(TreeNode root) {
       while (null != root.right)
          root = root.right;
       return root;
    }
 
    public static void levelOrderTraversal(BstTree tree) {
-      Queue<Node> queue = new LinkedList<>();
+      Queue<TreeNode> queue = new LinkedList<>();
       queue.offer(tree.root);
       queue.offer(null);
       List<Integer> levelList = new ArrayList<Integer>();
       while (!queue.isEmpty()) {
-         Node currentNode = queue.poll();
+         TreeNode currentNode = queue.poll();
          if (null != currentNode) {
-            levelList.add(currentNode.data);
+            levelList.add(currentNode.val);
             if (null != currentNode.left)
                queue.offer(currentNode.left);
             if (null != currentNode.right)
@@ -150,7 +150,7 @@ public class BstTree {
    }
 
    public void deleteNode(BstTree tree, int dataNode) {
-      Node targetNode = getNode(tree, dataNode);
+      TreeNode targetNode = getNode(tree, dataNode);
       if (null == targetNode.right && null == targetNode.left) {
          if (targetNode.parent == targetNode.parent.left)
             targetNode.parent.left = null;
@@ -164,7 +164,7 @@ public class BstTree {
          targetNode.left.parent = targetNode.parent;
       } else {
          if (null != targetNode.right.left) {
-            Node sucessor = successor(tree, targetNode.data);
+            TreeNode sucessor = successor(tree, targetNode.val);
             sucessor.left = targetNode.left;
             targetNode.left.parent = sucessor;
 
@@ -182,7 +182,7 @@ public class BstTree {
    public static void main(String[] args) {
       BstTree tree = new BstTree();
       // getAllAncestors(tree.root, getNode(tree, 14));
-      System.out.println(successorForBst(tree.root, 31).data);
+      System.out.println(successorForBst(tree.root, 31).val);
       /*
        * BstTree.inorder(com.raajan.tree.root); System.out.println("Succesor"); Node node =
        * getNode(com.raajan.tree, 30); System.out.println(node.parent.data);
@@ -199,20 +199,20 @@ public class BstTree {
     * @param targetNode
     * @return
     */
-   public static boolean getAllAncestors(Node root, Node targetNode) {
+   public static boolean getAllAncestors(TreeNode root, TreeNode targetNode) {
       if (null == root)
          return false;
-      if (root.data == targetNode.data) {
-         System.out.println(root.data);
+      if (root.val == targetNode.val) {
+         System.out.println(root.val);
          return true;
       }
 
       if (getAllAncestors(root.left, targetNode)) {
-         System.out.println(root.data);
+         System.out.println(root.val);
          return true;
       }
       if (getAllAncestors(root.right, targetNode)) {
-         System.out.println(root.data);
+         System.out.println(root.val);
          return true;
       }
       return false;

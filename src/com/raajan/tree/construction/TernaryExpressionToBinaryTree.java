@@ -2,7 +2,7 @@ package com.raajan.tree.construction;
 
 import java.util.Stack;
 
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * 
@@ -27,23 +27,23 @@ public class TernaryExpressionToBinaryTree {
 		String expression = "a?b?c:d:e";
 		char[] expChar = expression.toCharArray();
 
-		Node root = convertUsingStack(expChar);
+		TreeNode root = convertUsingStack(expChar);
 		System.out.println();
 
 	}
 
-	public static Node convertUsingStack(char[] expr) {
+	public static TreeNode convertUsingStack(char[] expr) {
 		if (expr.length == 0) {
 			return null;
 		}
 
-		Node root = new Node(expr[0]);
+		TreeNode root = new TreeNode(expr[0]);
 
-		Stack<Node> stack = new Stack<>();
+		Stack<TreeNode> stack = new Stack<>();
 		stack.add(root);
 
 		for (int i = 1; i < expr.length; i += 2) {
-			Node node = new Node(expr[i + 1]);
+			TreeNode node = new TreeNode(expr[i + 1]);
 
 			if (expr[i] == '?') {
 				stack.peek().left = node;

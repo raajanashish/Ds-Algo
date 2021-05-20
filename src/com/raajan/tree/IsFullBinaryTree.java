@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class IsFullBinaryTree {
-	Node root;
+	TreeNode root;
 
 	/* this function checks if a binary tree is full or not */
-	boolean isFullTree(Node node) {
+	boolean isFullTree(TreeNode node) {
 		// if empty tree
 		if (node == null)
 			return true;
@@ -26,14 +26,14 @@ public class IsFullBinaryTree {
 
 	}
 
-	public static boolean isFullBinaryTree(Node root) {
+	public static boolean isFullBinaryTree(TreeNode root) {
 
 		// if tree is empty
 		if (root == null)
 			return true;
 
 		// queue used for level order traversal
-		Queue<Node> q = new LinkedList<Node>();
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
 
 		// push 'root' to 'q'
 		q.add(root);
@@ -43,7 +43,7 @@ public class IsFullBinaryTree {
 		while (!q.isEmpty()) {
 			// get the pointer to 'node' at front
 			// of queue
-			Node node = q.peek();
+			TreeNode node = q.peek();
 			q.remove();
 
 			// if it is a leaf node then continue

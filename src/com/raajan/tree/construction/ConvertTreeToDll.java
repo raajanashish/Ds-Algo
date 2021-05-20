@@ -1,6 +1,6 @@
 package com.raajan.tree.construction;
 
-import com.raajan.tree.Node;
+import com.raajan.tree.TreeNode;
 
 /**
  * https://www.geeksforgeeks.org/in-place-convert-a-given-binary-tree-to-doubly-linked-list/
@@ -14,20 +14,20 @@ import com.raajan.tree.Node;
 public class ConvertTreeToDll {
 	
 	
-	Node root;
+	TreeNode root;
 
 	// head --> Pointer to head node of created doubly linked list
-	Node head;
+	TreeNode head;
 
 	// Initialize previously visited node as NULL. This is
 	// static so that the same value is accessible in all recursive
 	// calls
-	static Node prev = null;
+	static TreeNode prev = null;
 
 	// A simple recursive function to convert a given Binary tree
 	// to Doubly Linked List
 	// root --> Root of Binary Tree
-	void BinaryTree2DoubleLinkedList(Node root) {
+	void BinaryTree2DoubleLinkedList(TreeNode root) {
 		// Base case
 		if (root == null)
 			return;
