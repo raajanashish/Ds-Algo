@@ -1,4 +1,4 @@
-package com.raajan.dp.tree;
+package com.raajan.tree.sum;
 
 import com.raajan.tree.BinaryTree;
 import com.raajan.tree.TreeNode;
