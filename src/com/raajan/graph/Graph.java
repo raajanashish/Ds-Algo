@@ -11,9 +11,9 @@ import java.util.List;
  *
  */
 public class Graph {
-	int V;
-	public static List<Integer>[] adjList;
-	public static int[][] adjMat;
+	public int V;
+	public List<Integer>[] adjList;
+	public int[][] adjMat;
 
 	@SuppressWarnings("unchecked")
 	public Graph(int V) {
@@ -25,14 +25,55 @@ public class Graph {
 		return adjList[u].add(new Integer(v)) && adjList[v].add(new Integer(u));
 	}
 
-	public static List<Integer>[] intialise(int V,int[][] array) {
-		new Graph(V);
+	public static List<Integer>[] intialise(int V, int[][] array) {
+		Graph graph = new Graph(V);
 		for (int i = 0; i < array.length; i++) {
-			adjList[i] = new ArrayList<Integer>();
+			graph.adjList[i] = new ArrayList<Integer>();
 			for (int j = 0; j < array[i].length; j++) {
-				adjList[i].add(new Integer(array[i][j]));
+				graph.adjList[i].add(new Integer(array[i][j]));
 			}
 		}
-		return adjList;
+		return graph.adjList;
 	}
+
+	public int E;
+	public Edge[] edges;
+
+	public class Edge {
+		public int u;
+		public int v;
+
+		public Edge(int u, int v) {
+			this.u = u;
+			this.v = v;
+		}
+
+		public Edge() {
+
+		}
+	}
+
+	public Graph(int V, int E) {
+		this.V = V;
+		this.E = E;
+
+		edges = new Edge[E];
+		for (int i = 0; i < E; i++) {
+			edges[i] = new Edge();
+		}
+
+	}
+
+	public static Graph intialiseWithEdges(int V, int[][] edges) {
+		Graph graph = new Graph(V, edges.length);
+
+		for (int i = 0; i < edges.length; i++) {
+			int[] edge = edges[i];
+			graph.edges[i].u = edge[0];
+			graph.edges[i].v = edge[1];
+
+		}
+		return graph;
+	}
+
 }
