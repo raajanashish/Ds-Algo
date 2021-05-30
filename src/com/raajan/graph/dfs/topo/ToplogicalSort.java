@@ -16,9 +16,7 @@ import com.raajan.graph.Graph;
  *
  */
 public class ToplogicalSort {
-
 	Deque<Integer> order = new ArrayDeque<>();
-
 	public static void main(String[] args) {
 
 		// int[][] array = { {}, {}, { 3 }, { 1 }, { 0, 1 }, { 2, 0 } };
@@ -27,7 +25,7 @@ public class ToplogicalSort {
 		ToplogicalSort myObj = new ToplogicalSort();
 
 		myObj.topologicalSortUsingDFS(adjList);
-		// myObj.topologicalSortUsingBFS(adjList);
+		myObj.topologicalSortUsingBFS(adjList);
 	}
 
 	private boolean topologicalSortUsingDFS(List<Integer>[] adjList) {
@@ -44,9 +42,11 @@ public class ToplogicalSort {
 		// reversing the sequence for stack
 		int[] orderArray = new int[adjList.length];
 		for (int i = 0; !order.isEmpty(); i++)
+		{
 			orderArray[i] = order.pop();
+		}
 
-		System.out.println(orderArray);
+		System.out.println("DFS : " + Arrays.toString(orderArray));
 		return true;
 	}
 
@@ -65,41 +65,38 @@ public class ToplogicalSort {
 		}
 		inRec[u] = false;
 		order.push(u);
-		System.out.print(" " + u);
 		return true;
 	}
 
 	private boolean topologicalSortUsingBFS(List<Integer>[] adjList) {
 		int[] order = new int[adjList.length];
 		if (bfsUtil(adjList, order)) {
-			System.out.println(Arrays.toString(order));
+			System.out.println("BFS : " + Arrays.toString(order));
 			return true;
 		}
 		return false;
 
 	}
 
-	public boolean bfsUtil(List<Integer> adjList[], int[] order) {
+	public boolean bfsUtil(List<Integer> adjList[], int[] topologicalOrder) {
 		int[] degree = new int[adjList.length];
-		Queue queue = new LinkedList();
+		Queue<Integer> queue = new LinkedList<>();
 		int visited = 0;
 
 		for (int u = 0; u < adjList.length; u++) {
 			for (int v : adjList[u]) {
 				degree[v]++;
 			}
-
 		}
 		for (int i = 0; i < degree.length; i++) {
 			if (degree[i] == 0) {
 				queue.add(i);
-
 			}
 		}
 
 		while (!queue.isEmpty()) {
 			int u = (int) queue.poll();
-			order[visited] = u;
+			topologicalOrder[visited] = u;
 			visited++;
 			for (int v : adjList[u]) {
 				degree[v]--;
@@ -113,5 +110,4 @@ public class ToplogicalSort {
 		else
 			return false;
 	}
-
 }

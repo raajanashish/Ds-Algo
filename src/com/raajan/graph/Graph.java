@@ -39,17 +39,34 @@ public class Graph {
 	public int E;
 	public Edge[] edges;
 
-	public class Edge {
+	public class Edge implements Comparable<Edge> {
 		public int u;
 		public int v;
+		public int w;
 
 		public Edge(int u, int v) {
 			this.u = u;
 			this.v = v;
 		}
 
+		public Edge(int u, int v, int w) {
+			this.u = u;
+			this.v = v;
+			this.w = w;
+		}
+
 		public Edge() {
 
+		}
+
+		@Override
+		public int compareTo(Edge other) {
+			return this.w - other.w;
+		}
+
+		@Override
+		public String toString() {
+			return this.u + "-->" + this.v + " : " + this.w;
 		}
 	}
 
@@ -71,6 +88,9 @@ public class Graph {
 			int[] edge = edges[i];
 			graph.edges[i].u = edge[0];
 			graph.edges[i].v = edge[1];
+			if (edge.length == 3) {
+				graph.edges[i].w = edge[2];
+			}
 
 		}
 		return graph;
