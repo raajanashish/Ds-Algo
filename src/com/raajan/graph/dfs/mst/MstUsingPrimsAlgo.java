@@ -1,6 +1,7 @@
 package com.raajan.graph.dfs.mst;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,10 +30,8 @@ public class MstUsingPrimsAlgo {
 		int[] dist = new int[adjMat.length];
 		HashSet<Integer> mstSet = new HashSet<Integer>();
 		// initialising the distance array
-		for (int i = 0; i < dist.length; i++) {
-			dist[i] = Integer.MAX_VALUE;
-		}
-
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		
 		// adding the first vertex
 		dist[0]=0;
 		parent[0] = -1;
@@ -70,4 +69,5 @@ public class MstUsingPrimsAlgo {
 		}
 		return minKey;
 	}
+
 }
