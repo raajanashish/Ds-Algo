@@ -38,7 +38,7 @@ public class LongestCommonSubSequence {
         y--;
         // System.out.println("[" + x + " ," + y + "]");
 
-      } else if (lookup[x - 1][y] <= lookup[x][y]) {
+      } else if (lookup[x - 1][y] >= lookup[x][y-1]) {
         x--;
         // System.out.println("[" + x + " ," + y + "]");
       } else {
@@ -58,8 +58,8 @@ public class LongestCommonSubSequence {
       return getLCSRec(X.substring(0, X.length() - 1), Y.substring(0, Y.length() - 1))
           + X.charAt(X.length() - 1);
     } else {
-      String a = getLCSRec(X.substring(0, X.length() - 1), Y.substring(0, Y.length()));
-      String b = getLCSRec(X.substring(0, X.length()), Y.substring(0, Y.length() - 1));
+      String a = getLCSRec(X.substring(0, X.length() - 1), Y);
+      String b = getLCSRec(X, Y.substring(0, Y.length() - 1));
       return a.length() >= b.length() ? a : b;
     }
   }

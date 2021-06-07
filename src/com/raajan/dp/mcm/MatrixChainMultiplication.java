@@ -4,8 +4,8 @@ public class MatrixChainMultiplication {
   private static int[][] T;
 
   public static void main(String[] args) {
-    int[] P = {40, 20, 30, 10, 30};
-    // int P[] = new int[] { 1, 2, 3, 4 };
+   int[] P = {40, 20, 30, 10, 30};
+     //int P[] = new int[] { 1, 2, 3, 4 };
 
     T = new int[P.length][P.length];
     for (int i = 0; i < P.length; i++) {
@@ -69,8 +69,8 @@ public class MatrixChainMultiplication {
 
     int result = Integer.MAX_VALUE;
     for (int k = i; k < j; k++) {
-      int tempResult = matricsChainMultiplication(array, i, k)
-          + matricsChainMultiplication(array, k + 1, j) + array[i - 1] * array[k] * array[j];
+      int tempResult = mcmMemo(array, i, k)
+          + mcmMemo(array, k + 1, j) + array[i - 1] * array[k] * array[j];
       if (tempResult < result) {
         result = tempResult;
         System.out.print(k + ", ");
@@ -85,9 +85,9 @@ public class MatrixChainMultiplication {
     int[][] matMin = new int[P.length][P.length];
     int[][] bracket = new int[P.length][P.length];
     int n = P.length;
-    for (int matLen = 2; matLen < n; matLen++) {
-      for (int i = 1; i < n - matLen + 1; i++) {
-        int j = i + matLen - 1;
+    for (int len = 2; len < n; len++) {
+      for (int i = 1; i < n - len + 1; i++) {
+        int j = i + len - 1;
 
         if (j == n) {
           continue;

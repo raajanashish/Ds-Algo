@@ -23,7 +23,7 @@ public class BooleanParenthesization {
 
   public static int parenthesizationCount(char[] exp, int i, int j, boolean isTrue) {
     if (i > j) {
-      return 0;
+      return 0;  // it will not reach here never 
     }
 
     if (i == j) {
@@ -87,25 +87,25 @@ public class BooleanParenthesization {
       int rightFalse = 0;
 
       if (t[i][k - 1][1] == -1) {
-        leftTrue = parenthesizationCount(exp, i, k - 1, true);
+        leftTrue = parenthesizationCountMemo(exp, i, k - 1, true);
         t[i][k - 1][1] = leftTrue;
       } else {
         leftTrue = t[i][k - 1][1];
       }
       if (t[i][k - 1][0] == -1) {
-        leftFalse = parenthesizationCount(exp, i, k - 1, false);
+        leftFalse = parenthesizationCountMemo(exp, i, k - 1, false);
       } else {
         leftTrue = t[i][k - 1][0];
         t[i][k - 1][0] = leftTrue;
       }
       if (t[k + 1][j][1] == -1) {
-        rightTrue = parenthesizationCount(exp, k + 1, j, true);
+        rightTrue = parenthesizationCountMemo(exp, k + 1, j, true);
         t[k + 1][j][1] = rightTrue;
       } else {
         rightTrue = t[k + 1][j][1];
       }
       if (t[k + 1][j][0] == -1) {
-        rightFalse = parenthesizationCount(exp, k + 1, j, false);
+        rightFalse = parenthesizationCountMemo(exp, k + 1, j, false);
         t[k + 1][j][0] = rightFalse;
       } else {
         rightFalse = t[k + 1][j][0];

@@ -40,8 +40,7 @@ public class LongestCommonSubString {
     }
     int xLcs = lcSubStringRec(X, Y, m - 1, n, 0);
     int yLcs = lcSubStringRec(X, Y, m, n - 1, 0);
-    count = Math.max(count, Math.max(xLcs, yLcs));
-    return count;
+    return Math.max(count, Math.max(xLcs, yLcs));
   }
 
 

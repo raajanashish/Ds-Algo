@@ -75,7 +75,7 @@ public class PalindromPartitioning {
 
     int result = Integer.MAX_VALUE;
     for (int k = i; k < j; k++) {
-      int tempResult = minPalinPart(s, i, k) + minPalinPart(s, k + 1, j) + 1;
+      int tempResult = minPalinPartMemo(s, i, k) + minPalinPartMemo(s, k + 1, j) + 1;
       if (tempResult < result) {
         result = tempResult;
       }
